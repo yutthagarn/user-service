@@ -1,9 +1,14 @@
 # user-service
+## Run Service
+mvn spring-boot:run
 
-## Register AIP
+## Register
 URL: http://localhost:8080/api/user/register
+
 Http Method: POST
+
 Header: Content-Type:application/json
+
 Body: {
 	"username":"cyberpunkz",
 	"password":"abc123",
@@ -15,8 +20,11 @@ Body: {
 
 ## Login
 URL: http://localhost:8080/login
+
 Http Method: POST
+
 Header: Content-Type:application/json
+
 Body: {
 	"username":"cyberpunkz",
 	"password":"abc123"
@@ -24,5 +32,7 @@ Body: {
 
 ## Get All User
 URL: http://localhost:8080/api/user
+
 Http Method: GET
+
 Header: Authorization: Bearer <Token>
