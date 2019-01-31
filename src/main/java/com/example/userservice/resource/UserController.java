@@ -2,10 +2,9 @@ package com.example.userservice.resource;
 
 import com.example.userservice.domain.User;
 import com.example.userservice.repository.UserRepository;
-import com.example.userservice.utils.CommonUtils;
+import com.example.userservice.service.UserService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,19 +19,16 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private UserRepository userRepository;
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private UserService userService;
 
-    public UserController(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public UserController(UserRepository userRepository, UserService userService) {
         this.userRepository = userRepository;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.userService = userService;
     }
 
     @PostMapping("/register")
     public User register(@RequestBody @Validated User user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setRegisterDate(CommonUtils.createRegisterDate(user.getMobileNo()));
-        user.setMemberType(CommonUtils.calculateMemberType(user.getSalary()));
-        return userRepository.save(user);
+        return userService.register(user);
     }
 
     @GetMapping
