@@ -35,4 +35,4 @@ URL: http://localhost:8080/api/user
 
 Http Method: GET
 
-Header: Authorization: Bearer <Token>
+Header: Authorization: Bearer {Token}
